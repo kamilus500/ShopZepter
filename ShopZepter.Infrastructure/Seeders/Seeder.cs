@@ -99,7 +99,6 @@ namespace ShopZepter.Infrastructure.Seeders
                     {
                         new Order()
                         {
-                            ClientId = 1,
                             Code = 42125,
                             Count = 2,
                             Gross = (decimal)25.0,
@@ -108,7 +107,6 @@ namespace ShopZepter.Infrastructure.Seeders
                         },
                         new Order()
                         {
-                            ClientId = 2,
                             Code = 33221,
                             Count = 2,
                             Gross = (decimal)5.0,
@@ -117,7 +115,6 @@ namespace ShopZepter.Infrastructure.Seeders
                         },
                         new Order()
                         {
-                            ClientId = 3,
                             Code = 133768,
                             Count = 31,
                             Gross = (decimal)95.00,
@@ -127,6 +124,31 @@ namespace ShopZepter.Infrastructure.Seeders
                     };
 
                     _dbContext.Orders.AddRange(orders);
+                    _dbContext.SaveChanges();
+                }
+
+                if (!_dbContext.OrderClients.Any())
+                {
+                    var orderClients = new List<OrderClient>()
+                    {
+                        new OrderClient()
+                        {
+                            OrderId = 1,
+                            ClientId = 1,
+                        },
+                        new OrderClient()
+                        {
+                            OrderId = 2,
+                            ClientId = 2,
+                        },
+                        new OrderClient()
+                        {
+                            OrderId = 3,
+                            ClientId = 2,
+                        }
+                    };
+
+                    _dbContext.OrderClients.AddRange(orderClients);
                     _dbContext.SaveChanges();
                 }
 
@@ -146,7 +168,7 @@ namespace ShopZepter.Infrastructure.Seeders
                         },
                         new OrderShop()
                         {
-                            ShopId = 3,
+                            ShopId = 2,
                             OrderId = 3
                         },
                     };
