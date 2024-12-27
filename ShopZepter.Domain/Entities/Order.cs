@@ -11,8 +11,9 @@ namespace ShopZepter.Domain.Entities
         public int Count { get; set; }
 
         public PayType PayType { get; set; }
+        public int ClientId { get; set; }
+        public Client Client { get; set; }
 
         public IEnumerable<OrderShop> OrderShops { get; set; }
-        public IEnumerable<OrderClient> OrderClients { get; set; }
     }
 }

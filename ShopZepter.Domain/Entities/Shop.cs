@@ -6,6 +6,5 @@
         public string Name { get; set; }
 
         public IEnumerable<OrderShop> OrderShops { get; set; }
-        public IEnumerable<OrderClient> OrderClients { get; set; }
     }
 }

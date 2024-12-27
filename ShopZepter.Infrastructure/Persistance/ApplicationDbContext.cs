@@ -9,7 +9,6 @@ namespace ShopZepter.Infrastructure.Persistance
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderShop> OrderShops { get; set; }
-        public DbSet<OrderClient> OrderClients { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -32,21 +31,6 @@ namespace ShopZepter.Infrastructure.Persistance
                 .HasOne(c => c.Shop)
                 .WithMany(c => c.OrderShops)
                 .HasForeignKey(c => c.ShopId);
-
-            modelBuilder.Entity<OrderClient>()
-                .HasKey(c => new { c.OrderId, c.ClientId });
-
-            modelBuilder.Entity<OrderClient>()
-                .HasOne(c => c.Order)
-                .WithMany(c => c.OrderClients)
-                .HasForeignKey(c => c.OrderId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<OrderClient>()
-                .HasOne(c => c.Client)
-                .WithMany(c => c.OrderClients)
-                .HasForeignKey(c => c.ClientId)
-                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

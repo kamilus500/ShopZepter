@@ -24,8 +24,7 @@ namespace ShopZepter.Infrastructure.Repositories
                 const string query = @"SELECT S.Name AS 'Name', O.Gross AS 'Gross', O.Net AS 'Net', O.Count AS 'Count', O.PayType AS 'Type', (O.Net * O.Count) AS SUM, C.City + ' ' + C.Street + ' ' + C.PostCode AS Adress
                                         FROM Orders O
                                         INNER JOIN OrderShops OS ON OS.OrderId = O.Id
-										INNER JOIN OrderClients OC ON OC.OrderId = O.Id
-                                        INNER JOIN Clients C ON C.Id = OC.ClientId
+                                        INNER JOIN Clients C ON C.Id = O.ClientId
                                         INNER JOIN Shops S ON S.Id = OS.ShopId
                                         WHERE C.City LIKE '%w%'
                                         AND TRY_CAST(SUBSTRING(S.Name, CHARINDEX(' ', S.Name) + 1, LEN(S.Name)) AS INT) % 2 = 0;";
