@@ -9,6 +9,7 @@ namespace ShopZepter.Infrastructure.Persistance
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderShop> OrderShops { get; set; }
+        public DbSet<OrderLine> Lines { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

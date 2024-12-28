@@ -13,13 +13,14 @@ namespace ShopZepter.Infrastructure.Repositories
 
         public async Task<IEnumerable<OrderSummaryViewModel>> GetOrdersSummary(CancellationToken cancellationToken)
             => await _dbContext.Orders
-                        .Where(o => (o.Gross * o.Count) >= 100)
-                        .GroupBy(order => order.PayType)
+                        .Include(o => o.Lines)
+                        .Where(o => o.Lines.Sum(l => l.Gross * l.Count) >= 100)
+                        .GroupBy(o => o.PayType)
                         .Select(o => new OrderSummaryViewModel()
                         {
                             Type = o.Key,
                             Count = o.Count(),
-                            TotalGross = o.Sum(o => o.Gross)
+                            TotalGross = o.Sum(c => c.Lines.Sum(l => l.Gross * l.Count))
                         }).ToListAsync(cancellationToken);
     }
 }

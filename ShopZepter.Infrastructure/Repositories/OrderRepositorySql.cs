@@ -21,9 +21,10 @@ namespace ShopZepter.Infrastructure.Repositories
         {
             using (var dbConnection = Connection)
             {
-                const string query = @"SELECT S.Name AS 'Name', O.Gross AS 'Gross', O.Net AS 'Net', O.Count AS 'Count', O.PayType AS 'Type', (O.Net * O.Count) AS SUM, C.City + ' ' + C.Street + ' ' + C.PostCode AS Adress
+                const string query = @"SELECT S.Name AS 'Name', L.Gross AS 'Gross', L.Net AS 'Net', L.Count AS 'Count', O.PayType AS 'Type', (L.Net * L.Count) AS Sum, C.City + ' ' + C.Street + ' ' + C.PostCode AS Adress
                                         FROM Orders O
                                         INNER JOIN OrderShops OS ON OS.OrderId = O.Id
+										INNER JOIN Lines L ON L.OrderId = OS.OrderId
                                         INNER JOIN Clients C ON C.Id = O.ClientId
                                         INNER JOIN Shops S ON S.Id = OS.ShopId
                                         WHERE C.City LIKE '%w%'

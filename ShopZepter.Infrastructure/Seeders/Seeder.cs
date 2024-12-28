@@ -99,29 +99,76 @@ namespace ShopZepter.Infrastructure.Seeders
                         new Order()
                         {
                             ClientId = 1,
-                            Code = 42125,
-                            Count = 2,
-                            Gross = (decimal)25.0,
-                            Net = (decimal)15.0,
+                            Lines = new List<OrderLine>()
+                            {
+                                new OrderLine()
+                                {
+                                    Code = 42125,
+                                    Count = 2,
+                                    Gross = (decimal)25.0,
+                                    Net = (decimal)15.0,
+                                }
+                            },
                             PayType = Domain.Enums.PayType.Card
                         },
                         new Order()
                         {
                             ClientId = 2,
-                            Code = 33221,
-                            Count = 2,
-                            Gross = (decimal)5.0,
-                            Net = (decimal)2.5,
+                            Lines = new List<OrderLine>()
+                            {
+                                new OrderLine()
+                                {
+                                    Code = 33221,
+                                    Count = 2,
+                                    Gross = (decimal)5.0,
+                                    Net = (decimal)2.5
+                                },
+                                new OrderLine()
+                                {
+                                    Code = 9952,
+                                    Count = 10,
+                                    Gross = (decimal)25.0,
+                                    Net = (decimal)20.5
+                                },
+                            },
                             PayType = Domain.Enums.PayType.Transfer
                         },
                         new Order()
                         {
                             ClientId = 3,
-                            Code = 133768,
-                            Count = 31,
-                            Gross = (decimal)95.00,
-                            Net = (decimal)65.00,
+                            Lines = new List<OrderLine>()
+                            {
+                                new OrderLine()
+                                {
+                                    Code = 133768,
+                                    Count = 31,
+                                    Gross = (decimal)95.00,
+                                    Net = (decimal)65.00,
+                                },
+                                new OrderLine()
+                                {
+                                    Code = 133222,
+                                    Count = 10,
+                                    Gross = (decimal)20.00,
+                                    Net = (decimal)15.00,
+                                },
+                            },
                             PayType = Domain.Enums.PayType.Cash
+                        },
+                        new Order()
+                        {
+                            ClientId = 3,
+                            Lines = new List<OrderLine>()
+                            {
+                                new OrderLine()
+                                {
+                                    Code = 25212,
+                                    Count = 50,
+                                    Gross = (decimal)15.00,
+                                    Net = (decimal)10.00,
+                                },
+                            },
+                            PayType = Domain.Enums.PayType.Transfer
                         }
                     };
 
@@ -148,6 +195,11 @@ namespace ShopZepter.Infrastructure.Seeders
                             ShopId = 2,
                             OrderId = 3
                         },
+                        new OrderShop()
+                        {
+                            ShopId = 2,
+                            OrderId = 4
+                        }
                     };
 
                     _dbContext.OrderShops.AddRange(orderShops);
